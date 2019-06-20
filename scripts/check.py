@@ -3,8 +3,8 @@ import glob, os
 import re
 import sys
 
-md_pattern = re.compile("[0-9]{2}(_[a-zA-Zа-яА-я0-9]+)?(\.tex\.md)")
-docx_pattern = re.compile("[0-9]{2}(_[a-zA-Zа-яА-я0-9]+)?(\.docx)")
+md_pattern = re.compile("[0-9]{2}(_[a-zA-Zа-яА-я0-9_\s]+)?(\.tex\.md)")
+docx_pattern = re.compile("[0-9]{2}(_[a-zA-Zа-яА-я0-9_\s]+)?(\.docx)")
 
 is_ok = True
 

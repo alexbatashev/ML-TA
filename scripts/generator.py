@@ -1,15 +1,23 @@
+# -*- coding: utf-8 -*-
 import glob, os
 import subprocess
+
+symbols = (u"абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ",
+           u"abvgdeejzijklmnoprstufhzcss_y_euaABVGDEEJZIJKLMNOPRSTUFHZCSS_Y_EUA")
+
+tr = {ord(a):ord(b) for a, b in zip(*symbols)}
 
 includes = []
 
 for file in glob.glob("*.tex.md"):
-    subprocess.call(['pandoc', '-f', 'markdown-auto_identifiers', '-t', 'latex', file, '-o', file.replace(".tex.md", ".tex")])
-    includes.append(file.replace(".tex.md", ".tex"))
+    new_file_name = str(file.replace(".tex.md", ".tex")).translate(tr)
+    subprocess.call(['pandoc', '-f', 'markdown-auto_identifiers', '-t', 'latex', file, '-o', new_file_name])
+    includes.append(new_file_name)
 
 for file in glob.glob("*.docx"):
-    subprocess.call(['pandoc', '-t', 'latex', file, '-o', file.replace(".docx", ".tex")])
-    includes.append(file.replace(".docx", ".tex"))
+    new_file_name = str(file.replace(".docx", ".tex")).translate(tr)
+    subprocess.call(['pandoc', '-f', 'docx+latex_macros-hard_line_breaks-empty_paragraphs+superscript+subscript-styles', '-t', 'latex', file, '-o', new_file_name])
+    includes.append(new_file_name)
 
 includes.sort()
 

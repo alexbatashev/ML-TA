@@ -27,5 +27,5 @@ deploy:
    - "./readable.pdf"
    - "./printable.pdf"
   on:
-    repo: TheSanchouz/ML-TA
+    repo: alexbatashev/ML-TA
     branch: master
