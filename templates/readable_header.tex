@@ -1,0 +1,37 @@
+\documentclass[14pt, a4paper]{article}
+
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+%--------------------------------------
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\parindent 1.25cm
+\renewcommand{\baselinestretch}{1.4}
+
+\usepackage{geometry}
+\geometry{left=2.5cm}
+\geometry{right=1.5cm}
+\geometry{top=2cm}
+\geometry{bottom=2cm}
+
+\sloppy
+\hyphenpenalty=1000
+\clubpenalty=10000
+\widowpenalty=10000
+
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\hspace{0pt}}            % Имена секций в содержании не жирным шрифтом
+\renewcommand\cftsecleader{\cftdotfill{\cftdotsep}} % Точки для секций в содержании
+\renewcommand\cftsecpagefont{\mdseries}             % Номера страниц не жирные
+\setcounter{tocdepth}{3}                            % Глубина оглавления, до subsubsection
+
+\title{МЛиТА}
+
+\begin{document}
+
+\tableofcontents
+\clearpage
+

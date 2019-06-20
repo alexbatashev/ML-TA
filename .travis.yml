@@ -1,0 +1,31 @@
+dist: xenial
+language: python
+addons:
+  apt:
+    packages:
+    - pandoc
+    - texlive-full
+    - python
+script:
+- python scripts/check.py
+- python scripts/generator.py
+
+before_deploy:
+    # Set up git user name and tag this commit
+    - git config --local user.name "Alexander Batashev"
+    - git config --local user.email "alexbatashev@outlook.com"
+    - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+    - export TRAVIS_NAME=${TRAVIS_NAME:-$(git log --format=%s -1)}
+    - git tag $TRAVIS_TAG
+deploy:
+  provider: releases
+  skip_cleanup: true
+  name: ${TRAVIS_NAME}
+  api_key:
+    secure: CWJ83QVuFeUTZ/WzSce9ORyzpL+o8rDFdtRQXhriCARHeQCwX95KQnljy2EXDBlHPDCy9zqRcPQLb/m2Sh3mEXkuO42UpNJjXxww/AFpIJQ2ZG8oKZ71iLWV8FdtZ4Guq3/SS8KZIqWQO5iNMzDHn9bds3YzIpWbDlUXRylR78oUUtjAIeTXHBUGuNdBwqpOQrR99Kf5Av87GnlghwxJzOMKw9QfFzK0mLq35ZMp/eI1ngYHW/QLg7GOoou3qqPHjL35URLvHh/7EO016A2mbO6AYHAItFYRCGIDE26GbUkz9VyZ6FVUZdgZ30UE1HE9Db71/y4Oftkez8+cOo+58b+2bffVoqghWkWZ3M3vvdBigiFZkvGXUjPaovaAU2WS1jCPzC0JQF99NQXzq5OP8IRUAROltcMLom0bsOkEOsldSkKhMuPwc9C1MQTJOck5TtUB2SZNDbFXY8zG3OsPnwjq0/aLqVyzTwL7OzviA7WVBOsgH3gGH5zFIgyEVa86xg7ZXm2OiZrWk1CIsGJCZOzCQh6L3zG6DhSeGWfV+T/k++qgfQf+/88P0NhWJS8TitQIFZdspDDZK4cvkKUiI8uny1gCG3vMHiXT1XKtHBu/wRFv0c1ewfFNwLGTPxZp+Laoo7Ypy0ZH7dMLKshCh/JVLO9/UBUu2lbO19NzRgE=
+  file:
+   - "./readable.pdf"
+   - "./printable.pdf"
+  on:
+    repo: TheSanchouz/ML-TA
+    branch: master
